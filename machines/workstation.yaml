@@ -1,0 +1,14 @@
+key: workstation
+name: Workstation
+description: NVIDIA RTX 4080 16 GB
+devices:
+  gpu0: {kind: gpu, model: RTX 4080, vram_gb: 16}
+deployments:
+  - key: gpt-oss-20b:gguf-mxfp4-ggml-org@workstation-gpu0/llamacpp-b11345-cuda
+    artifact: gpt-oss-20b:gguf-mxfp4-ggml-org
+    devices: [gpu0]
+    engine: {name: llamacpp, build: b11345, backend: cuda}
+    settings: {ctx: 131072}
+    template: {name: default, source: gguf}
+    served_as: tt-worker (LiteLLM, 00:00-16:00; the Mac mini serves it otherwise)
+    unverified: [engine.build, settings.ctx, settings.kv_cache]

@@ -1,0 +1,23 @@
+key: glm4.7-flash
+name: GLM-4.7-Flash
+family: glm
+vendor: zhipu
+series: "4.7"
+architecture: moe
+params_total_b: null
+params_active_b: null
+native_ctx: 202752          # the context the ai-server serves it at; confirm it is the native maximum
+modalities: [text]
+reasoning: hybrid
+tool_calling: native
+base_model: null
+license: null
+hf_repo: null
+unverified: [params_total_b, params_active_b, native_ctx, reasoning, license, hf_repo]
+artifacts:
+  - key: glm4.7-flash:gguf-ud-q4_k_xl-unsloth
+    format: gguf
+    quant: UD-Q4_K_XL
+    quantizer: unsloth
+    size_gb: 17.5
+    files: [{name: GLM-4.7-Flash-UD-Q4_K_XL.gguf, sha256: null}]

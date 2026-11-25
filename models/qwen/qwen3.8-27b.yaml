@@ -1,0 +1,39 @@
+key: qwen3.8-27b
+name: Qwen3.8-27B
+family: qwen
+vendor: alibaba
+series: "3.8"
+architecture: dense
+params_total_b: 27
+params_active_b: 27
+native_ctx: 262144
+modalities: [text, image]     # image through an mmproj file
+reasoning: hybrid             # thinking can be toggled
+tool_calling: native
+base_model: null
+license: null
+hf_repo: null
+unverified: [license, hf_repo, modalities]
+artifacts:
+  - key: qwen3.8-27b:gguf-ud-q4_k_xl-unsloth
+    format: gguf
+    quant: UD-Q4_K_XL
+    quantizer: unsloth
+    files: [{name: Qwen3.8-27B-UD-Q4_K_XL.gguf, sha256: null}]
+    mtp_tensors: true
+    notes: ai-server production coder weights (tt-coder)
+  - key: qwen3.8-27b:gguf-ud-q5_k_xl-unsloth
+    format: gguf
+    quant: UD-Q5_K_XL
+    quantizer: unsloth
+    files: [{name: Qwen3.8-27B-UD-Q5_K_XL.gguf, sha256: null}]
+  - key: qwen3.8-27b:gguf-ud-q6_k-unsloth
+    format: gguf
+    quant: UD-Q6_K
+    quantizer: unsloth
+    files: [{name: Qwen3.8-27B-UD-Q6_K.gguf, sha256: null}]
+  - key: qwen3.8-27b:gguf-ud-q6_k_xl-unsloth
+    format: gguf
+    quant: UD-Q6_K_XL
+    quantizer: unsloth
+    files: [{name: Qwen3.8-27B-UD-Q6_K_XL.gguf, sha256: null}]

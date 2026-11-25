@@ -1,0 +1,13 @@
+key: macmini
+name: Mac mini
+description: Apple M4 Pro, 48 GB unified memory, 273 GB/s
+devices:
+  soc: {kind: unified, model: Apple M4 Pro, memory_gb: 48, bandwidth_gbs: 273}
+deployments:
+  - key: qwen3-coder-30b-a3b:mlx-4bit-mlx-community@macmini/omlx-metal-kvaffine8
+    artifact: qwen3-coder-30b-a3b:mlx-4bit-mlx-community
+    engine: {name: omlx, build: null, backend: metal}
+    settings: {ctx: 131072, kv_cache: affine8}
+    template: {name: default, source: model}
+    served_as: tt-review (LiteLLM)
+    unverified: [engine.build, settings.kv_cache, settings.ctx]

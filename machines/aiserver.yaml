@@ -1,0 +1,99 @@
+key: aiserver
+name: ai-server
+description: 2x AMD Radeon AI PRO R9700 32 GB, 121 GB RAM; llama-swap in front of every engine
+devices:
+  gpu0: {kind: gpu, model: Radeon AI PRO R9700, vram_gb: 32, arch: gfx1201}
+  gpu1: {kind: gpu, model: Radeon AI PRO R9700, vram_gb: 32, arch: gfx1201}
+ram_gb: 121
+# Engine builds: stock llama.cpp v1.0.0+ at commit 29b52d398 (previously b11345 / a868c3e3c); the Unsloth fork
+# prebuilts are used for Flash-Next MTP. Source: local/servers/ai-server/env.sh and the serve-*.sh scripts.
+deployments:
+  - key: qwen3.8-27b:gguf-ud-q4_k_xl-unsloth@aiserver-gpu0/llamacpp-29b52d398-vulkan-draft-mtp3-kvq8
+    artifact: qwen3.8-27b:gguf-ud-q4_k_xl-unsloth
+    devices: [gpu0]
+    engine: {name: llamacpp, build: 29b52d398, backend: vulkan}
+    settings: {ctx: 262144, parallel: 1, kv_cache: q8_0, flash_attn: true, spec: {type: draft-mtp, n: 3}}
+    template: {name: default, source: gguf}
+    served_as: tt-coder
+    script: serve-coder.sh
+
+  - key: qwen3.6-35b-a3b:gguf-ud-q4_k_xl-unsloth@aiserver-gpu1/llamacpp-29b52d398-vulkan-kvq8-tpl-qwen3.8-effort-v2
+    artifact: qwen3.6-35b-a3b:gguf-ud-q4_k_xl-unsloth
+    devices: [gpu1]
+    engine: {name: llamacpp, build: 29b52d398, backend: vulkan}
+    settings: {ctx: 262144, parallel: 1, kv_cache: q8_0, flash_attn: true}
+    template: {name: qwen3.8-effort-v2, source: templates/qwen3.8-effort-v2.jinja}
+    served_as: tt-manager
+    script: serve-manager.sh
+
+  - key: qwen3.8-flash-next:gguf-ud-iq3_xxs-unsloth@aiserver-gpu0.gpu1/llamacpp-unsloth-rocm-draft-mtp3-kvq8
+    artifact: qwen3.8-flash-next:gguf-ud-iq3_xxs-unsloth
+    devices: [gpu0, gpu1]
+    engine: {name: llamacpp-unsloth, build: null, backend: rocm}
+    settings: {ctx: 131072, parallel: 1, kv_cache: q8_0, flash_attn: true, split: layer, ubatch: 1024, batch: 4096,
+               spec: {type: draft-mtp, n: 3, draft: qwen3.8-flash-next:gguf-q8_0-unsloth-mtp-draft},
+               overrides: [per_layer_token_embd=CPU]}
+    template: {name: default, source: gguf}
+    served_as: tt-flash
+    script: serve-flash.sh
+    unverified: [engine.build]
+
+  - key: qwen3.8-flash-next:gguf-ud-iq4_xs-unsloth@aiserver-gpu0.gpu1/strata-0.1.63-rocm
+    artifact: qwen3.8-flash-next:gguf-ud-iq4_xs-unsloth
+    devices: [gpu0, gpu1]
+    engine: {name: strata, build: 0.1.63, backend: rocm}
+    settings: {ctx: 131072}
+    template: {name: default, source: gguf}
+    served_as: flash-strata
+    script: serve-strata.sh (config strata-unsloth-ud-iq4_xs.json)
+    unverified: [settings.kv_cache]
+
+  - key: swift1.5-qwen3.8-27b:gguf-q4_k_m-ukisai@aiserver-gpu0/llamacpp-29b52d398-vulkan-draft-mtp3-kvq8
+    artifact: swift1.5-qwen3.8-27b:gguf-q4_k_m-ukisai
+    devices: [gpu0]
+    engine: {name: llamacpp, build: 29b52d398, backend: vulkan}
+    settings: {ctx: 262144, parallel: 1, kv_cache: q8_0, flash_attn: true, spec: {type: draft-mtp, n: 3}}
+    template: {name: default, source: gguf}
+    served_as: swift-27b
+    script: serve-solo.sh swift-27b
+    unverified: [engine.build]   # stored runs from mid-November may predate the 29b52d398 build
+
+  - key: gemma4-31b:gguf-qat-ud-q4_k_xl-unsloth@aiserver-gpu0/llamacpp-29b52d398-vulkan-kvq8
+    artifact: gemma4-31b:gguf-qat-ud-q4_k_xl-unsloth
+    devices: [gpu0]
+    engine: {name: llamacpp, build: 29b52d398, backend: vulkan}
+    settings: {ctx: 262144, parallel: 1, kv_cache: q8_0, flash_attn: true}
+    template: {name: default, source: gguf}
+    served_as: gemma4-31b
+    script: serve-solo.sh gemma4-31b
+    unverified: [engine.build]
+
+  - key: gemma4-26b-a4b:gguf-qat-ud-q4_k_xl-unsloth@aiserver-gpu0/llamacpp-29b52d398-vulkan-kvq8
+    artifact: gemma4-26b-a4b:gguf-qat-ud-q4_k_xl-unsloth
+    devices: [gpu0]
+    engine: {name: llamacpp, build: 29b52d398, backend: vulkan}
+    settings: {ctx: 262144, parallel: 1, kv_cache: q8_0, flash_attn: true}
+    template: {name: default, source: gguf}
+    served_as: gemma4-26b
+    script: serve-solo.sh gemma4-26b
+    unverified: [engine.build]
+
+  - key: glm4.7-flash:gguf-ud-q4_k_xl-unsloth@aiserver-gpu0/llamacpp-29b52d398-vulkan-kvq8
+    artifact: glm4.7-flash:gguf-ud-q4_k_xl-unsloth
+    devices: [gpu0]
+    engine: {name: llamacpp, build: 29b52d398, backend: vulkan}
+    settings: {ctx: 202752, parallel: 1, kv_cache: q8_0, flash_attn: true}
+    template: {name: default, source: gguf}
+    served_as: glm47-flash
+    script: serve-solo.sh glm47-flash
+    unverified: [engine.build]
+
+  - key: muse-glimmer-30b:gguf-ud-q4_k_xl-unsloth@aiserver-gpu0/llamacpp-29b52d398-vulkan-kvq8
+    artifact: muse-glimmer-30b:gguf-ud-q4_k_xl-unsloth
+    devices: [gpu0]
+    engine: {name: llamacpp, build: 29b52d398, backend: vulkan}
+    settings: {ctx: 262144, parallel: 1, kv_cache: q8_0, flash_attn: true, mmproj: true}
+    template: {name: default, source: gguf}
+    served_as: muse-30b
+    script: serve-solo.sh muse-30b
+    unverified: [engine.build]

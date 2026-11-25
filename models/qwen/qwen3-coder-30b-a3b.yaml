@@ -1,0 +1,24 @@
+key: qwen3-coder-30b-a3b
+name: Qwen3-Coder-30B-A3B-Instruct
+family: qwen
+vendor: alibaba
+series: "3"
+architecture: moe
+params_total_b: 30.5
+params_active_b: 3.3
+experts: {total: 128, active: 8}
+native_ctx: 262144
+modalities: [text]
+reasoning: none
+tool_calling: native
+base_model: null
+license: apache-2.0
+hf_repo: Qwen/Qwen3-Coder-30B-A3B-Instruct
+unverified: []
+artifacts:
+  - key: qwen3-coder-30b-a3b:mlx-4bit-mlx-community
+    format: mlx
+    quant: 4bit
+    quantizer: mlx-community
+    files: [{name: Qwen3-Coder-30B-A3B-Instruct-MLX-4bit, sha256: null}]
+    unverified: [quantizer]

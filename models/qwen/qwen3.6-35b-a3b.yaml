@@ -1,0 +1,32 @@
+key: qwen3.6-35b-a3b
+name: Qwen3.6-35B-A3B
+family: qwen
+vendor: alibaba
+series: "3.6"
+architecture: moe
+params_total_b: 35
+params_active_b: 3
+native_ctx: 262144
+modalities: [text]
+reasoning: hybrid
+tool_calling: native
+base_model: null
+license: null
+hf_repo: null
+unverified: [license, hf_repo, experts]
+artifacts:
+  - key: qwen3.6-35b-a3b:gguf-ud-q4_k_xl-unsloth
+    format: gguf
+    quant: UD-Q4_K_XL
+    quantizer: unsloth
+    files: [{name: Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf, sha256: null}]
+    mtp_tensors: false
+    notes: ai-server production manager weights (tt-manager)
+  - key: qwen3.6-35b-a3b:gguf-ud-q4_k_xl-unsloth-mtp
+    format: gguf
+    quant: UD-Q4_K_XL
+    quantizer: unsloth
+    variant: mtp
+    files: [{name: Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf, sha256: null}]   # Qwen3.6-35B-MTP directory
+    mtp_tensors: true
+    notes: same quant with MTP tensors; slower on this MoE (local/servers/ai-server/env.sh)

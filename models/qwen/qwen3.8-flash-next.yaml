@@ -1,0 +1,41 @@
+key: qwen3.8-flash-next
+name: Qwen3.8-Flash-Next
+family: qwen
+vendor: alibaba
+series: "3.8"
+architecture: moe
+params_total_b: null
+params_active_b: null
+native_ctx: 262144
+modalities: [text]
+reasoning: hybrid
+tool_calling: native
+base_model: null
+license: null
+hf_repo: null
+unverified: [architecture, params_total_b, params_active_b, license, hf_repo]
+notes: key gains -a<N>b once the active parameter count is confirmed
+artifacts:
+  - key: qwen3.8-flash-next:gguf-ud-iq3_xxs-unsloth
+    format: gguf
+    quant: UD-IQ3_XXS
+    quantizer: unsloth
+    files: [{name: Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf, sha256: null, shards: 3}]
+  - key: qwen3.8-flash-next:gguf-ud-q3_k_xl-unsloth
+    format: gguf
+    quant: UD-Q3_K_XL
+    quantizer: unsloth
+    files: [{name: Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf, sha256: null, shards: 3}]
+  - key: qwen3.8-flash-next:gguf-ud-iq4_xs-unsloth
+    format: gguf
+    quant: UD-IQ4_XS
+    quantizer: unsloth
+    size_gb: 88
+    files: [{name: Qwen3.8-Flash-Next-UD-IQ4_XS-00001-of-00003.gguf, sha256: null, shards: 3}]
+  - key: qwen3.8-flash-next:gguf-q8_0-unsloth-mtp-draft
+    format: gguf
+    quant: Q8_0
+    quantizer: unsloth
+    variant: mtp-draft
+    files: [{name: mtp-Qwen3.8-Flash-Next-shared-Q8_0.gguf, sha256: null}]
+    notes: MTP sidecar passed with -md; not servable on its own

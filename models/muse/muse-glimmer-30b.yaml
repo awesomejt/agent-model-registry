@@ -1,0 +1,26 @@
+key: muse-glimmer-30b
+name: Muse Glimmer 30B
+family: muse
+vendor: meta
+series: glimmer
+architecture: dense
+params_total_b: 30
+params_active_b: 30
+native_ctx: 131072
+modalities: [text, image]
+reasoning: hybrid
+tool_calling: native
+base_model: null
+license: apache-2.0
+hf_repo: null
+unverified: [architecture, native_ctx, reasoning, hf_repo]
+notes: distilled from Muse Spark; ships a DFlash drafter (local/research/local-models-2026-10.md)
+artifacts:
+  - key: muse-glimmer-30b:gguf-ud-q4_k_xl-unsloth
+    format: gguf
+    quant: UD-Q4_K_XL
+    quantizer: unsloth
+    size_gb: 15.9
+    files:
+      - {name: Muse-Glimmer-30B-UD-Q4_K_XL.gguf, sha256: null}
+      - {name: mmproj-Muse-Glimmer-30B-Q8_0.gguf, sha256: null, role: mmproj}

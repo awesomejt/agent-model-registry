@@ -1,0 +1,21 @@
+# Controlled vocabularies. `registry check` rejects values not listed here, so grouping by these fields works.
+# Add a value here (in its own commit) before using it.
+
+model_required: [key, name, family, vendor, architecture]
+
+# Model line, used for grouping ("all qwen", "all gemma"). Fine-tunes keep their base family.
+families: [qwen, gemma, glm, muse, gpt-oss, minimax, nemotron, inkling, ornith, deepseek, mistral, llama, phi]
+
+# dense: every parameter active per token. moe: mixture of experts. hybrid: attention mixed with linear/SSM
+# layers (dense). hybrid-moe: both.
+architectures: [dense, moe, hybrid, hybrid-moe]
+
+formats: [gguf, mlx, safetensors, rad, other]
+
+# Who produced the quantised file (the same quant name from two quantizers is two different artifacts).
+quantizers: [unsloth, bartowski, mlx-community, lmstudio-community, ggml-org, official, ukisai, self, unknown]
+
+engines: [llamacpp, llamacpp-unsloth, beellama, strata, avalon, radiance, maya, omlx, tensorfold, splash, kapitsa,
+          lmstudio, ollama, vllm, sglang]
+
+backends: [vulkan, rocm, cuda, metal, cpu]

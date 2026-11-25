@@ -1,0 +1,24 @@
+key: gemma4-26b-a4b
+name: Gemma 4 26B-A4B IT
+family: gemma
+vendor: google
+series: "4"
+architecture: moe
+params_total_b: 26
+params_active_b: 4
+native_ctx: 262144
+modalities: [text, image]
+reasoning: null
+tool_calling: native
+base_model: null
+license: null
+hf_repo: null
+unverified: [native_ctx, reasoning, license, hf_repo]
+artifacts:
+  - key: gemma4-26b-a4b:gguf-qat-ud-q4_k_xl-unsloth
+    format: gguf
+    qat: true
+    quant: UD-Q4_K_XL
+    quantizer: unsloth
+    size_gb: 14.2
+    files: [{name: gemma-4-26B-A4B-it-qat-UD-Q4_K_XL.gguf, sha256: null}]

@@ -1,0 +1,16 @@
+# Short names people and tools type. An alias is a pointer and may be repointed (git history keeps the old target);
+# deployment keys never change. `route` = a router (LiteLLM tier) that may send a request to any listed deployment,
+# so runs through it cannot be attributed to one deployment unless the router reports which one answered.
+# The first names are the ones modelbench's config/models.yaml uses.
+aliases:
+  qwen38-27b:        {deployment: "qwen3.8-27b:gguf-ud-q4_k_xl-unsloth@aiserver-gpu0/llamacpp-29b52d398-vulkan-draft-mtp3-kvq8"}
+  qwen36-35b:        {deployment: "qwen3.6-35b-a3b:gguf-ud-q4_k_xl-unsloth@aiserver-gpu1/llamacpp-29b52d398-vulkan-kvq8-tpl-qwen3.8-effort-v2"}
+  flash-next-iq3:    {deployment: "qwen3.8-flash-next:gguf-ud-iq3_xxs-unsloth@aiserver-gpu0.gpu1/llamacpp-unsloth-rocm-draft-mtp3-kvq8"}
+  flash-next-strata: {deployment: "qwen3.8-flash-next:gguf-ud-iq4_xs-unsloth@aiserver-gpu0.gpu1/strata-0.1.63-rocm"}
+  swift-27b:         {deployment: "swift1.5-qwen3.8-27b:gguf-q4_k_m-ukisai@aiserver-gpu0/llamacpp-29b52d398-vulkan-draft-mtp3-kvq8"}
+  gemma4-31b:        {deployment: "gemma4-31b:gguf-qat-ud-q4_k_xl-unsloth@aiserver-gpu0/llamacpp-29b52d398-vulkan-kvq8"}
+  gemma4-26b:        {deployment: "gemma4-26b-a4b:gguf-qat-ud-q4_k_xl-unsloth@aiserver-gpu0/llamacpp-29b52d398-vulkan-kvq8"}
+  glm47-flash:       {deployment: "glm4.7-flash:gguf-ud-q4_k_xl-unsloth@aiserver-gpu0/llamacpp-29b52d398-vulkan-kvq8"}
+  muse-30b:          {deployment: "muse-glimmer-30b:gguf-ud-q4_k_xl-unsloth@aiserver-gpu0/llamacpp-29b52d398-vulkan-kvq8"}
+  qwen3-coder-30b:   {deployment: "qwen3-coder-30b-a3b:mlx-4bit-mlx-community@macmini/omlx-metal-kvaffine8"}
+  gpt-oss-20b:       {route: ["gpt-oss-20b:gguf-mxfp4-ggml-org@workstation-gpu0/llamacpp-b11345-cuda"]}   # Mac mini deployment not registered yet

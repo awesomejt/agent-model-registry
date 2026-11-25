@@ -1,0 +1,25 @@
+key: swift1.5-qwen3.8-27b
+name: Swift-1.5-Qwen3.8-27B
+family: qwen
+vendor: alibaba          # lineage vendor (decides judge exclusion); the fine-tune publisher is below
+publisher: ukisai
+series: "3.8"
+architecture: dense
+params_total_b: 27
+params_active_b: 27
+native_ctx: 262144
+modalities: [text]
+reasoning: hybrid
+tool_calling: native
+base_model: qwen3.8-27b
+license: null
+hf_repo: null
+unverified: [license, hf_repo]
+notes: fewer thinking tokens than the base; not better end to end (local/research/engines-and-finetunes-2026-10-22.md)
+artifacts:
+  - key: swift1.5-qwen3.8-27b:gguf-q4_k_m-ukisai
+    format: gguf
+    quant: Q4_K_M
+    quantizer: ukisai
+    files: [{name: Swift-1.5-Qwen3.8-27B-Q4_K_M.gguf, sha256: null}]
+    mtp_tensors: true

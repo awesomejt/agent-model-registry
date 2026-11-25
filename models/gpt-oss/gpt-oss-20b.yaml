@@ -1,0 +1,25 @@
+key: gpt-oss-20b
+name: gpt-oss-20b
+family: gpt-oss
+vendor: openai
+series: "1"
+architecture: moe
+params_total_b: 21
+params_active_b: 3.6
+experts: {total: 32, active: 4}
+native_ctx: 131072
+modalities: [text]
+reasoning: always           # low / medium / high effort
+tool_calling: native
+base_model: null
+license: apache-2.0
+hf_repo: openai/gpt-oss-20b
+unverified: []
+vendor_name_key: true      # keep the universal vendor name instead of gpt-oss-20b-a3.6b
+artifacts:
+  - key: gpt-oss-20b:gguf-mxfp4-ggml-org
+    format: gguf
+    quant: MXFP4
+    quantizer: ggml-org
+    files: [{name: null, sha256: null}]
+    unverified: [quantizer, files]
